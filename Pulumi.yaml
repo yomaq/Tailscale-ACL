@@ -1,0 +1,6 @@
+name: tailnet
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: configure tailnet
