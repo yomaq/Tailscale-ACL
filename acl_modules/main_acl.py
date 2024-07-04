@@ -77,7 +77,7 @@ main_acl = {
         {
             "action": "accept",
             "src": ["group:admins"],
-            "dst": ["group:admins:443", "group:admins:80", "group:admins:4000"],
+            "dst": ["group:admins:443", "group:admins:80", "group:admins:4000", "group:admins:8000", "group:admins:18000"],
         },
         # homepage
         {
