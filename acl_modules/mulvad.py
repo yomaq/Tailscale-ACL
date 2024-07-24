@@ -6,6 +6,7 @@ hostnames = [
     "gray",
     "midnight",
     "blue",
+    "beam",
 ]
 
 # Obtain the tailnet name
