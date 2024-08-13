@@ -9,7 +9,7 @@ from acl_modules.moonlight import user_moonlight_access
 
 # DNS configuration
 dns_preferences = tailscale.DnsPreferences("tailnet-dns-preferences", magic_dns=True)
-dns_servers = tailscale.DnsNameservers("sample_nameservers", nameservers=["100.76.172.60",])
+dns_servers = tailscale.DnsNameservers("sample_nameservers", nameservers=["100.76.172.60", "100.107.183.10"])
 
 
 # List all acl modules
