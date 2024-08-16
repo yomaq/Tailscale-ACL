@@ -11,7 +11,7 @@ First real attempt with Pulumi iac, mostly using it to learn.
 * [install devenv](https://devenv.sh/getting-started/)
 * Then run `direnv allow` in the git directory.
 
-The flake is pinned to nixos-unstable and should pull the most recent updates each time you enter the direnv.  
+The flake is pinned to nixos-unstable and should pull the most recent updates each time you run `nix flake update`.  
 Pulumi esc is now merged! [pull request](https://github.com/NixOS/nixpkgs/pull/316044)
 
 The nix devenv isn't complete, it seems to have issues with the Python pulumi_tailscale provider package.
