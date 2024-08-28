@@ -22,11 +22,11 @@
                 ({ pkgs, config, ... }: {
                 packages = with pkgs; [ 
                     pulumi-bin
-                    pkgs.python3
+                    python3
                     pulumi-esc
                 ];
                 enterShell = ''
-                    Tailscale ACL
+                    echo Tailscale ACL
                 '';
                 })
             ];
