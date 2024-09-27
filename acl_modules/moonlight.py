@@ -5,10 +5,12 @@ import pulumi_tailscale as tailscale
 conf = pulumi.Config()
 user1 = conf.get("user1")
 user2 = conf.get("user2")
+user3 = conf.get("user3")
 
 # List out users, and the ip addresses of the hosts they should be able to moonlight into without tags
 moonlight_access = {
     user2: ["blue",],
+    user3: ["purple",]
 }
 
 # Ports moonlight uses

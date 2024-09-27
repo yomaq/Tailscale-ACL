@@ -115,6 +115,12 @@ main_acl = {
             "src": ["group:palworld", "autogroup:shared", "tag:sunshine"],
             "dst": ["tag:palworld:8211"],
         },
+        # satisfactory
+        {
+            "action": "accept",
+            "src": ["group:satisfactory", "autogroup:shared", "tag:sunshine"],
+            "dst": ["tag:satisfactory:7777"],
+        },
         # nextcloud
         {
             "action": "accept",

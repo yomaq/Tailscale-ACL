@@ -3,6 +3,7 @@ import pulumi
 conf = pulumi.Config()
 user1 = conf.get("user1")
 user2 = conf.get("user2")
+user3 = conf.get("user3")
 
 tags_groups = {
     # Create tags
@@ -18,6 +19,7 @@ tags_groups = {
         "tag:nextcloud": ["tag:container", "autogroup:admin"],
         "tag:pikvm": [],
         "tag:valheim": ["tag:container", "autogroup:admin"],
+        "tag:satisfactory": ["tag:container", "autogroup:admin"],
         "tag:palworld": ["tag:container", "autogroup:admin"],
         "tag:ephemeralSshOwner": [],
         "tag:AcceptSSH": ["tag:ephemeralSshOwner", "autogroup:admin"],
@@ -35,10 +37,11 @@ tags_groups = {
     # Groups of users.
     "groups": {
         "group:admins": [user1, user2],
-        "group:moonlight": [user1, user2],
-        "group:minecraft": [user1, user2],
+        "group:moonlight": [user1, user2, user3],
+        "group:minecraft": [user1, user2, user3],
         "group:valhiem": [user1, user2],
+        "group:satisfactory": [user1, user2, user3],
         "group:palworld": [user1, user2],
-        "group:nextcloud": [user1, user2],
+        "group:nextcloud": [user1, user2, user3],
     },
 }
