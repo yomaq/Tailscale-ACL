@@ -59,13 +59,19 @@ main_acl = {
             "action": "accept",
             "src": ["group:admins", "tag:homepage"],
             "proto": "tcp",
-            "dst": ["tag:glances:61208", "tag:glances:8787"],
+            "dst": ["tag:glances:61208", "tag:glances:8787", "ipset:personal-nix:61208", "ipset:personal-nix:8787"],
         },
         # Windows Docker Server
         {
             "action": "accept",
             "src": ["group:admins"],
             "dst": ["tag:windowsindocker:443", "tag:windowsindocker:3389"],
+        },
+        # SMB share
+        {
+            "action": "accept",
+            "src": ["group:admins"],
+            "dst": ["tag:smb:139", "tag:smb:445"],
         },
         # teslmate server
         {
@@ -121,6 +127,12 @@ main_acl = {
             "src": ["group:satisfactory", "autogroup:shared", "tag:sunshine"],
             "dst": ["tag:satisfactory:7777"],
         },
+        # factorio
+        {
+            "action": "accept",
+            "src": ["group:factorio", "autogroup:shared", "autogroup:admin", "tag:sunshine"],
+            "dst": ["tag:factorio:34197","tag:factorio:443"],
+        },
         # nextcloud
         {
             "action": "accept",
@@ -131,7 +143,7 @@ main_acl = {
         {
             "action": "accept",
             "src": ["group:admins"],
-            "dst": ["tag:pikvm:443"],
+            "dst": ["tag:pikvm:443", "tag:pikvm:80"],
         },
         # exit node access
         {
