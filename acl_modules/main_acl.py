@@ -130,7 +130,7 @@ main_acl = {
         # factorio
         {
             "action": "accept",
-            "src": ["group:factorio", "autogroup:shared", "autogroup:admin", "tag:sunshine"],
+            "src": ["group:satisfactory", "autogroup:shared", "autogroup:admin", "tag:sunshine"],
             "dst": ["tag:factorio:34197","tag:factorio:443"],
         },
         # nextcloud
@@ -152,4 +152,35 @@ main_acl = {
             "dst": ["autogroup:internet:*"],
         },
     ],
+    "nodeAttrs": [
+        {
+            # Only admins can use Taildrive to share and access directories
+            "target": ["group:admins"],
+            "attr": ["drive:share", "drive:access"],
+        }
+    ],
+    "grants": [
+        # allow self to read Taildrive from self
+        {
+            "src": ["autogroup:member"],
+            "dst": ["autogroup:self"],
+            "app": {
+                "tailscale.com/cap/drive": [{
+                    "shares": ["*"],
+                    "access": "rw"
+                }]
+            }
+        },
+        # allow admins to access all shares
+        {
+            "src": ["group:admins"],
+            "dst": ["*"],
+            "app": {
+                "tailscale.com/cap/drive": [{
+                    "shares": ["*"],
+                    "access": "rw"
+                }]
+            }
+        },
+    ]
 }
