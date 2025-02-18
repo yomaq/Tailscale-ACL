@@ -97,6 +97,12 @@ main_acl = {
             "src": ["*"],
             "dst": ["tag:ntfy:443"],
         },
+        # ollama
+        {
+            "action": "accept",
+            "src": ["tag:ollama-access", "group:ollama", "tag:homepage"],
+            "dst": [ "tag:ollama-server:443"],
+        },
         # minecraft server
         {
             "action": "accept",
