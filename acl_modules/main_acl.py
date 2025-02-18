@@ -155,8 +155,13 @@ main_acl = {
     "nodeAttrs": [
         {
             # Only admins can use Taildrive to share and access directories
+            "target": ["*"],
+            "attr": ["drive:share"],
+        },
+       {
+            # Only admins can use Taildrive to share and access directories
             "target": ["group:admins"],
-            "attr": ["drive:share", "drive:access"],
+            "attr": ["drive:access"],
         }
     ],
     "grants": [
