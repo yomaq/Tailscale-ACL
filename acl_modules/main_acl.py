@@ -100,7 +100,7 @@ main_acl = {
         # ollama
         {
             "action": "accept",
-            "src": ["tag:ollama-access", "group:ollama", "tag:homepage"],
+            "src": ["tag:ollama-access", "group:ollama", "tag:homepage", "*",],
             "dst": [ "tag:ollama-server:443"],
         },
         # minecraft server
