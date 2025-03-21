@@ -22,6 +22,7 @@ main_acl = {
                 "tag:sunshine:47999",
                 "tag:sunshine:48000",
                 "tag:sunshine:48002",
+                "tag:sunshine:6980",
             ],
         },
         # dns server settings
@@ -102,6 +103,12 @@ main_acl = {
             "action": "accept",
             "src": ["tag:ollama-access", "group:ollama", "tag:homepage", "*",],
             "dst": [ "tag:ollama-server:443"],
+        },
+        # RuskDesk
+        {
+            "action": "accept",
+            "src": ["group:admins"],
+            "dst": [ "tag:rustdesk:21118"],
         },
         # minecraft server
         {

@@ -61,6 +61,7 @@ tags_groups = {
         "tag:ntfy": [],
         "tag:semaphoreserver": [],
         "tag:semaphoreclient": [],
+        "tag:rustdesk": [],
         "tag:windowsindocker": ["tag:container", "autogroup:admin"],
         "tag:ollama-server": ["tag:container", "autogroup:admin"],
         "tag:ollama-access": ["tag:container", "autogroup:admin"],
