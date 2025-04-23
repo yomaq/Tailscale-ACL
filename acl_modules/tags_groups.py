@@ -28,15 +28,13 @@ def generate_ipsets(create_ipsets):
 
 create_ipsets = {
     "ipset:personal-nix": [
-        "add host:blue",
-        "add host:wsl"
+        "add host:wsl",
     ],
 }
 tags_groups = {
     # Create tags
     "tagOwners": {
         "tag:sunshine": [],
-        "tag:dnsServer": [],
         "tag:minecraft": ["tag:container", "autogroup:admin"],
         "tag:ssh": [],
         "tag:pingall": [],
@@ -57,8 +55,11 @@ tags_groups = {
         "tag:generichttps": ["tag:container", "autogroup:admin"],
         "tag:glances": [],
         "tag:collabora": [],
+        "tag:audiobookshelf": [],
         "tag:smb": [],
         "tag:ntfy": [],
+        "tag:acceptAllHttps": [],
+        "tag:acceptGuestHttps": [],
         "tag:semaphoreserver": [],
         "tag:semaphoreclient": [],
         "tag:rustdesk": [],
@@ -77,6 +78,7 @@ tags_groups = {
         "group:palworld": [user1, user2],
         "group:nextcloud": [user1, user2, user3],
         "group:ollama": [user1, user2, user3],
+        "group:audiobookshelf": [ user3],
     },
     # ipsets, groups of computers
     "ipsets": generate_ipsets(create_ipsets)

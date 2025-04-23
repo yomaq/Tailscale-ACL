@@ -5,7 +5,7 @@ import pulumi_tailscale as tailscale
 hostnames = [
     "gray",
     "midnight",
-    "blue",
+    "pewter",
     "beam",
 ]
 

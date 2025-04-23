@@ -9,41 +9,6 @@ main_acl = {
             "proto": "icmp",
             "dst": ["*:*"],
         },
-        # moonlight group can access sunshine servers through moonlight
-        {
-            "action": "accept",
-            "src": ["group:moonlight", "autogroup:shared"],
-            "dst": [
-                "tag:sunshine:47984",
-                "tag:sunshine:47989",
-                "tag:sunshine:47990",
-                "tag:sunshine:48010",
-                "tag:sunshine:47998",
-                "tag:sunshine:47999",
-                "tag:sunshine:48000",
-                "tag:sunshine:48002",
-                "tag:sunshine:6980",
-            ],
-        },
-        # dns server settings
-        {
-            "action": "accept",
-            "src": ["*"],
-            "proto": "tcp",
-            "dst": ["tag:dnsServer:53"],
-        },
-        {
-            "action": "accept",
-            "src": ["*"],
-            "proto": "udp",
-            "dst": ["tag:dnsServer:53"],
-        },
-        {
-            "action": "accept",
-            "src": ["group:admins", "tag:homepage"],
-            "proto": "tcp",
-            "dst": ["tag:dnsServer:80"],
-        },
         # give nextcloud access to collabora
         {
             "action": "accept",
@@ -97,6 +62,18 @@ main_acl = {
             "action": "accept",
             "src": ["*"],
             "dst": ["tag:ntfy:443"],
+        },
+        # accept all https
+        {
+            "action": "accept",
+            "src": ["*"],
+            "dst": ["tag:acceptAllHttps:443"],
+        },
+        # accept guest https
+        {
+            "action": "accept",
+            "src": ["*"],
+            "dst": ["tag:acceptGuestHttps:443"],
         },
         # ollama
         {
@@ -167,12 +144,12 @@ main_acl = {
     ],
     "nodeAttrs": [
         {
-            # Only admins can use Taildrive to share and access directories
+            # Taildrive to share directories
             "target": ["*"],
             "attr": ["drive:share"],
         },
        {
-            # Only admins can use Taildrive to share and access directories
+            # Only admins can access directories
             "target": ["group:admins"],
             "attr": ["drive:access"],
         }
@@ -200,5 +177,20 @@ main_acl = {
                 }]
             }
         },
+    #     # AudioBookShelf tsidp groups (feature was only merged 5 days ago, not out yet)
+    #     {
+    #     "src": ["group:audiobookshelf", "autogroup:shared"],
+    #     "dst": ["tag:audiobookshelf"],
+    #     "ip":  ["*"],
+    #     "app": {
+    #         "tailscale.com/cap/tsidp": [
+    #         {
+    #             "extraClaims": {
+    #             "groups": ["user"],
+    #             },
+    #         }
+    #         ]
+    #     }
+    #     }
     ]
 }
