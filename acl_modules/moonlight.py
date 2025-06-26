@@ -25,9 +25,10 @@ user_moonlight_access  = {"acls": []}
 for user, hostnames in moonlight_access.items():
     for hostname in hostnames:
         device = tailscale.get_device(hostname=hostname)
-        ip_address = device.addresses[0] 
+        ip_address = device.addresses[0]
         user_moonlight_access["acls"].append({
             "action": "accept",
             "src": [user],
             "dst": [f"{ip_address}:{port}" for port in MOONLIGHT_PORTS],
         })
+        

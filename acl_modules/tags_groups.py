@@ -66,6 +66,7 @@ tags_groups = {
         "tag:windowsindocker": ["tag:container", "autogroup:admin"],
         "tag:ollama-server": ["tag:container", "autogroup:admin"],
         "tag:ollama-access": ["tag:container", "autogroup:admin"],
+        "tag:speaches": ["tag:container", "autogroup:admin"],
     },
     # Groups of users.
     "groups": {
@@ -78,7 +79,7 @@ tags_groups = {
         "group:palworld": [user1, user2],
         "group:nextcloud": [user1, user2, user3],
         "group:ollama": [user1, user2, user3],
-        "group:audiobookshelf": [ user3],
+        "group:audiobookshelf": [ user3 ],
     },
     # ipsets, groups of computers
     "ipsets": generate_ipsets(create_ipsets)

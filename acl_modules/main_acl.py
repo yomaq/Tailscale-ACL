@@ -81,6 +81,12 @@ main_acl = {
             "src": ["tag:ollama-access", "group:ollama", "tag:homepage", "*",],
             "dst": [ "tag:ollama-server:443"],
         },
+        # speaches
+        {
+            "action": "accept",
+            "src": [ "tag:ollama-server", "group:admins", ],
+            "dst": [ "tag:speaches:8880" ],
+        },
         # RuskDesk
         {
             "action": "accept",
