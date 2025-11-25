@@ -42,11 +42,6 @@ ssh_rules = {
         },
         {
             "action": "accept",
-            "src": ["tag:semaphoreserver"],
-            "dst": ["tag:semaphoreclient:22"],
-        },
-        {
-            "action": "accept",
             "src": ["tag:syncoidServer"],
             "dst": ["tag:syncoidClient:22"],
         },

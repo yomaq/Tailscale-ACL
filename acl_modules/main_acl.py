@@ -9,23 +9,12 @@ main_acl = {
             "proto": "icmp",
             "dst": ["*:*"],
         },
-        # give nextcloud access to collabora
-        {
-            "action": "accept",
-            "src": ["group:nextcloud", "tag:nextcloud"],
-            "dst": ["tag:collabora:9980", "tag:collabora:443"],
-        },
-        {
-            "action": "accept",
-            "src": ["tag:collabora"],
-            "dst": ["tag:nextcloud:443"],
-        },
         # Glances
         {
             "action": "accept",
             "src": ["group:admins", "tag:homepage"],
             "proto": "tcp",
-            "dst": ["tag:glances:61208", "tag:glances:8787", "ipset:personal-nix:61208", "ipset:personal-nix:8787"],
+            "dst": ["tag:glances:61208", "tag:glances:8787", "ipset:personal-nix:61208", "ipset:personal-nix:8787", "tag:hostserver:61208", "tag:hostserver:8787"],
         },
         # Windows Docker Server
         {
@@ -49,36 +38,48 @@ main_acl = {
         {
             "action": "accept",
             "src": ["group:admins"],
-            "dst": ["group:admins:443", "group:admins:80", "group:admins:4000", "group:admins:8000", "group:admins:18000"],
+            "dst": ["autogroup:self:443", "autogroup:self:80", "autogroup:self:18000", "autogroup:self:12525"]
         },
         # homepage
         {
             "action": "accept",
             "src": ["group:admins", "tag:homepage"],
-            "dst": ["tag:generichttps:443", "tag:nextcloud:443"],
+            "dst": ["tag:service:443", "tag:adminservice:443"],
         },
         # ntfy
         {
             "action": "accept",
-            "src": ["*"],
+            "src": ["tag:service", "tag:adminservice", "tag:hostserver", "group:admins"],
             "dst": ["tag:ntfy:443"],
         },
-        # accept all https
+        # generichttp
         {
             "action": "accept",
-            "src": ["*"],
-            "dst": ["tag:acceptAllHttps:443"],
+            "src": ["group:admins"],
+            "dst": ["tag:generichttp:80"],
+        },
+        # services https
+        {
+            "action": "accept",
+            "src": ["group:services", "tag:service"],
+            "dst": ["tag:service:443"],
+        },
+        # services https
+        {
+            "action": "accept",
+            "src": ["group:admins"],
+            "dst": ["tag:adminservice:443"],
         },
         # accept guest https
         {
             "action": "accept",
-            "src": ["*"],
+            "src": ["autogroup:shared"],
             "dst": ["tag:acceptGuestHttps:443"],
         },
         # ollama
         {
             "action": "accept",
-            "src": ["tag:ollama-access", "group:ollama", "tag:homepage", "*",],
+            "src": ["tag:ollama-access", "group:ollama", "tag:homepage", "tag:hostserver"],
             "dst": [ "tag:ollama-server:443"],
         },
         # speaches
@@ -96,50 +97,32 @@ main_acl = {
         # minecraft server
         {
             "action": "accept",
-            "src": ["group:minecraft", "autogroup:shared", "tag:sunshine", "tag:homepage"],
+            "src": ["group:games", "autogroup:shared", "tag:sunshine", "tag:homepage"],
             "dst": ["tag:minecraft:19132"],
         },
         # valhiem
         {
             "action": "accept",
-            "src": ["group:valhiem", "autogroup:shared", "tag:sunshine"],
+            "src": ["group:games", "autogroup:shared", "tag:sunshine"],
             "dst": ["tag:valheim:2456", "tag:valheim:2457"],
-        },
-        # Allow https access to semaphore
-        {
-            "action": "accept",
-            "src": ["group:admins", "tag:homepage"],
-            "dst": ["tag:semaphoreserver:443"],
         },
         # palworld
         {
             "action": "accept",
-            "src": ["group:palworld", "autogroup:shared", "tag:sunshine"],
+            "src": ["group:games", "autogroup:shared", "tag:sunshine"],
             "dst": ["tag:palworld:8211"],
         },
         # satisfactory
         {
             "action": "accept",
-            "src": ["group:satisfactory", "autogroup:shared", "tag:sunshine"],
+            "src": ["group:games", "autogroup:shared", "tag:sunshine"],
             "dst": ["tag:satisfactory:7777"],
         },
         # factorio
         {
             "action": "accept",
-            "src": ["group:satisfactory", "autogroup:shared", "autogroup:admin", "tag:sunshine"],
+            "src": ["group:games", "autogroup:shared", "autogroup:admin", "tag:sunshine"],
             "dst": ["tag:factorio:34197","tag:factorio:443"],
-        },
-        # nextcloud
-        {
-            "action": "accept",
-            "src": ["group:nextcloud"],
-            "dst": ["tag:nextcloud:443"],
-        },
-        # access to pikvm
-        {
-            "action": "accept",
-            "src": ["group:admins"],
-            "dst": ["tag:pikvm:443", "tag:pikvm:80"],
         },
         # exit node access
         {
@@ -151,7 +134,7 @@ main_acl = {
     "nodeAttrs": [
         {
             # Taildrive to share directories
-            "target": ["*"],
+            "target": ["target:hostserver"],
             "attr": ["drive:share"],
         },
        {
@@ -183,20 +166,43 @@ main_acl = {
                 }]
             }
         },
-    #     # AudioBookShelf tsidp groups (feature was only merged 5 days ago, not out yet)
-    #     {
-    #     "src": ["group:audiobookshelf", "autogroup:shared"],
-    #     "dst": ["tag:audiobookshelf"],
-    #     "ip":  ["*"],
-    #     "app": {
-    #         "tailscale.com/cap/tsidp": [
-    #         {
-    #             "extraClaims": {
-    #             "groups": ["user"],
-    #             },
-    #         }
-    #         ]
-    #     }
-    #     }
+        # tsidp grants
+        {
+            "src": ["group:admins"],
+            "dst": ["tag:tsidp-server"],
+            "app": {
+                "tailscale.com/cap/tsidp": [
+                    {
+                    "allow_admin_ui": True,
+                    }
+                ]
+            }
+        },
+        {
+            "src": ["tag:tsidp-client"],
+            "dst": ["tag:tsidp-server"],
+            "app": {
+                "tailscale.com/cap/tsidp": [
+                    {
+                    "allow_dcr": True,
+                    }
+                ]
+            }
+        },
+        # generic admin for in tsidp
+        {
+            "src": ["group:admins"],
+            "dst": ["*"],
+            "app": {
+            "tailscale.com/cap/tsidp": [
+                {
+                "extraClaims": {
+                    "groups": ["admin"]
+                },
+                "includeInUserInfo": True
+                }
+            ]
+            }
+        }
     ]
 }

@@ -28,58 +28,55 @@ def generate_ipsets(create_ipsets):
 
 create_ipsets = {
     "ipset:personal-nix": [
-        "add host:wsl",
     ],
 }
 tags_groups = {
     # Create tags
     "tagOwners": {
-        "tag:sunshine": [],
-        "tag:minecraft": ["tag:container", "autogroup:admin"],
+        # owner tags
+        "tag:container": [],
+        "tag:ephemeralSshOwner": [],
+        # generic tags
         "tag:ssh": [],
         "tag:pingall": [],
+        "tag:AcceptSSH": ["tag:ephemeralSshOwner", "autogroup:admin"],
+        "tag:lockdown": ["tag:container", "autogroup:admin"],
+        "tag:generichttp": ["tag:container", "autogroup:admin"],
+        "tag:acceptGuestHttps": [],
+        "tag:smb": [],
+        "tag:service": [],
+        "tag:adminservice": [],
+        "tag:hostserver": [],
+        # core server tags
         "tag:syncoidServer": [],
         "tag:syncoidClient": [],
-        "tag:container": [],
-        "tag:nextcloud": ["tag:container", "autogroup:admin"],
         "tag:pikvm": [],
-        "tag:valheim": ["tag:container", "autogroup:admin"],
-        "tag:satisfactory": ["tag:container", "autogroup:admin"],
-        "tag:factorio": ["tag:container", "autogroup:admin"],
-        "tag:palworld": ["tag:container", "autogroup:admin"],
-        "tag:ephemeralSshOwner": [],
-        "tag:AcceptSSH": ["tag:ephemeralSshOwner", "autogroup:admin"],
         "tag:homepage": [],
-        "tag:lockdown": ["tag:container", "autogroup:admin"],
-        "tag:teslamate": ["tag:container", "autogroup:admin"],
-        "tag:generichttps": ["tag:container", "autogroup:admin"],
         "tag:glances": [],
-        "tag:collabora": [],
-        "tag:audiobookshelf": [],
-        "tag:smb": [],
         "tag:ntfy": [],
-        "tag:acceptAllHttps": [],
-        "tag:acceptGuestHttps": [],
-        "tag:semaphoreserver": [],
-        "tag:semaphoreclient": [],
+        "tag:tsidp-client": [],
+        "tag:tsidp-server": [],
+        # server tags
+        "tag:sunshine": [],
+        "tag:teslamate": ["tag:container", "autogroup:admin"],
         "tag:rustdesk": [],
         "tag:windowsindocker": ["tag:container", "autogroup:admin"],
         "tag:ollama-server": ["tag:container", "autogroup:admin"],
         "tag:ollama-access": ["tag:container", "autogroup:admin"],
         "tag:speaches": ["tag:container", "autogroup:admin"],
+        # game servers
+        "tag:valheim": ["tag:container", "autogroup:admin"],
+        "tag:satisfactory": ["tag:container", "autogroup:admin"],
+        "tag:factorio": ["tag:container", "autogroup:admin"],
+        "tag:palworld": ["tag:container", "autogroup:admin"],
+        "tag:minecraft": ["tag:container", "autogroup:admin"],
     },
     # Groups of users.
     "groups": {
         "group:admins": [user1, user2],
-        "group:moonlight": [user1, user2, user3],
-        "group:minecraft": [user1, user2, user3],
-        "group:valhiem": [user1, user2],
-        "group:satisfactory": [user1, user2, user3],
-        "group:factorio": [user1, user2, user3],
-        "group:palworld": [user1, user2],
-        "group:nextcloud": [user1, user2, user3],
-        "group:ollama": [user1, user2, user3],
-        "group:audiobookshelf": [ user3 ],
+        "group:games": [user1, user2, user3],
+        "group:services": [user1, user2, user3],
+        "group:ollama": [user1, user2],
     },
     # ipsets, groups of computers
     "ipsets": generate_ipsets(create_ipsets)

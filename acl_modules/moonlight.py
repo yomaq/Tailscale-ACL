@@ -9,8 +9,8 @@ user3 = conf.get("user3")
 
 # List out users, and the ip addresses of the hosts they should be able to moonlight into without tags
 moonlight_access = {
-    user2: ["jam", "purple", "athena",],
-    user3: ["jam", "purple", "athena",],
+    user2: ["jam", "purple", "athena", "desktop", ],
+    user3: ["jam", "athena",],
 
 }
 
