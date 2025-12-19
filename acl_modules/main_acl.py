@@ -61,7 +61,7 @@ main_acl = {
         # services https
         {
             "action": "accept",
-            "src": ["group:services", "tag:service"],
+            "src": ["group:services", "tag:hostserver", "tag:service"],
             "dst": ["tag:service:443"],
         },
         # services https
@@ -134,7 +134,7 @@ main_acl = {
     "nodeAttrs": [
         {
             # Taildrive to share directories
-            "target": ["target:hostserver"],
+            "target": ["tag:hostserver"],
             "attr": ["drive:share"],
         },
        {
