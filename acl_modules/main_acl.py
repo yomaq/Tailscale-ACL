@@ -61,7 +61,7 @@ main_acl = {
         # services https
         {
             "action": "accept",
-            "src": ["group:services", "tag:hostserver", "tag:service"],
+            "src": ["group:services", "tag:hostserver", "tag:service", "tag:adminservice"],
             "dst": ["tag:service:443"],
         },
         # services https
