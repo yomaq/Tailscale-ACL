@@ -35,6 +35,7 @@ tags_groups = {
     "tagOwners": {
         # owner tags
         "tag:container": [],
+        "tag:forgejoOwner": [],
         "tag:ephemeralSshOwner": [],
         # generic tags
         "tag:ssh": [],
@@ -58,6 +59,7 @@ tags_groups = {
         "tag:tsidp-server": [],
         # server tags
         "tag:sunshine": [],
+        "tag:forgejo": ["tag:forgejoOwner", "autogroup:admin"],
         "tag:teslamate": ["tag:container", "autogroup:admin"],
         "tag:rustdesk": [],
         "tag:windowsindocker": ["tag:container", "autogroup:admin"],

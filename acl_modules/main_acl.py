@@ -82,6 +82,12 @@ main_acl = {
             "src": ["tag:ollama-access", "group:ollama", "tag:homepage", "tag:hostserver"],
             "dst": [ "tag:ollama-server:443"],
         },
+        # forgejo
+        {
+            "action": "accept",
+            "src": ["tag:forgejo"],
+            "dst": [ "tag:forgejo:443"],
+        },
         # speaches
         {
             "action": "accept",
