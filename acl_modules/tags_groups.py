@@ -28,6 +28,7 @@ def generate_ipsets(create_ipsets):
 
 create_ipsets = {
     "ipset:personal-nix": [
+        "add host:vermilion"
     ],
 }
 tags_groups = {
